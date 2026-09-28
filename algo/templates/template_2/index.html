@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Escolha seu Plano</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            color: #1e293b;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .planos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .plano {
+            position: relative;
+        }
+
+        .plano input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .plano label {
+            display: block;
+            height: 100%;
+            padding: 25px;
+
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .plano label:hover {
+            border-color: #93c5fd;
+            transform: translateY(-3px);
+        }
+
+        .plano input:checked + label {
+            border-color: #2563eb;
+            background: #eff6ff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .plano h2 {
+            color: #1e293b;
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .preco {
+            color: #2563eb;
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .descricao {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #2563eb;
+            color: #ffffff;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .planos {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header class="header">
+            <h1>Escolha seu plano</h1>
+            <p>Selecione o plano que deseja contratar</p>
+        </header>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="planos">
+
+                <div class="plano">
+                    <input
+                        type="radio"
+                        id="basico"
+                        name="plano"
+                        value="basico"
+                        required
+                    >
+
+                    <label for="basico">
+                        <h2>Plano Básico</h2>
+
+                        <div class="preco">
+                            R$ 29,90/mês
+                        </div>
+
+                        <p class="descricao">
+                            Ideal para quem está começando.
+                            Inclui os recursos essenciais.
+                        </p>
+                    </label>
+                </div>
+
+
+                <div class="plano">
+                    <input
+                        type="radio"
+                        id="premium"
+                        name="plano"
+                        value="premium"
+                    >
+
+                    <label for="premium">
+                        <h2>Plano Premium</h2>
+
+                        <div class="preco">
+                            R$ 59,90/mês
+                        </div>
+
+                        <p class="descricao">
+                            Mais recursos e benefícios
+                            para uma experiência completa.
+                        </p>
+                    </label>
+                </div>
+
+
+                <div class="plano">
+                    <input
+                        type="radio"
+                        id="profissional"
+                        name="plano"
+                        value="profissional"
+                    >
+
+                    <label for="profissional">
+                        <h2>Plano Profissional</h2>
+
+                        <div class="preco">
+                            R$ 99,90/mês
+                        </div>
+
+                        <p class="descricao">
+                            Para quem precisa de todos
+                            os recursos disponíveis.
+                        </p>
+                    </label>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn">
+                Continuar
+            </button>
+
+        </form>
+
+    </main>
+
+</body>
+</html>

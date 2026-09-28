@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Finalizar Inscrição</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+
+            background: #ffffff;
+            padding: 40px;
+
+            border-radius: 16px;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #1e293b;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .resumo {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .resumo-titulo {
+            padding: 15px 20px;
+
+            background: #f8fafc;
+
+            color: #1e293b;
+            font-size: 18px;
+            font-weight: bold;
+
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+
+            padding: 15px 20px;
+
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .item .label {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .item .valor {
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .confirmacao {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+
+            margin-bottom: 25px;
+
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .confirmacao input {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+
+            cursor: pointer;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #16a34a;
+            color: #ffffff;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #15803d;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .voltar {
+            display: block;
+
+            margin-top: 15px;
+
+            color: #2563eb;
+
+            text-align: center;
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+        .voltar:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .item {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .item .valor {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header class="header">
+            <h1>Finalizar Inscrição</h1>
+
+            <p>
+                Confira seus dados antes de finalizar.
+            </p>
+        </header>
+
+
+        <section class="resumo">
+
+            <div class="resumo-titulo">
+                Resumo da inscrição
+            </div>
+
+            <div class="item">
+                <span class="label">
+                    Nome
+                </span>
+
+                <span class="valor">
+                    {{ request.session.Inscricao.nome }}
+                </span>
+            </div>
+
+
+            <div class="item">
+                <span class="label">
+                    E-mail
+                </span>
+
+                <span class="valor">
+                    {{ request.session.Inscricao.email }}
+                </span>
+            </div>
+
+
+            <div class="item">
+                <span class="label">
+                    Celular
+                </span>
+
+                <span class="valor">
+                    {{ request.session.Inscricao.celular }}
+                </span>
+            </div>
+
+
+            <div class="item">
+                <span class="label">
+                    Data de nascimento
+                </span>
+
+                <span class="valor">
+                    {{ request.session.Inscricao.data_nascimento }}
+                </span>
+            </div>
+
+
+            <div class="item">
+                <span class="label">
+                    Plano escolhido
+                </span>
+
+                <span class="valor">
+                    {{ request.session.Inscricao.plano }}
+                </span>
+            </div>
+
+        </section>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label class="confirmacao">
+
+                <input
+                    type="checkbox"
+                    name="confirmacao"
+                    required
+                >
+
+                <span>
+                    Confirmo que os dados informados estão corretos
+                    e desejo finalizar minha inscrição.
+                </span>
+
+            </label>
+
+
+            <button type="submit" class="btn">
+                Finalizar inscrição
+            </button>
+
+        </form>
+
+
+        <a href="{% url 'planos' %}" class="voltar">
+            Voltar para escolha do plano
+        </a>
+
+    </main>
+
+</body>
+</html>
